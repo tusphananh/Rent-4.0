@@ -41,45 +41,33 @@
     width: 60%;
 }
 
-@keyframes showAboutLeft {
+@keyframes opacityAnimation {
     from{
+        margin-top: 200px;
         opacity: 0;
     }
     to{
+        margin-top: 30px;
         opacity: 1;
     }
 }
-@keyframes showAboutRight {
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
-}
-@keyframes showAboutMid {
-    from{
-        opacity: 0;
-    }
-    to{
-        opacity: 1;
-    }
+
+.about_detail{
+    margin-top: 30px;
+    animation-name: opacityAnimation;
+    animation-duration: 2s;
 }
 #right_about{
     box-shadow: 20px 20px 56px rgba(122, 158, 159, 0.5);
     top: 50px;
-    animation-name: showAboutLeft;
-    animation-duration: 2s;
+
 }
 
 #left_about{
     box-shadow: -20px 20px 56px rgba(122, 158, 159, 0.5);
     top: 60px;
-    animation-name: showAboutRight;
-    animation-duration: 2s;
-}
 
+}
 #mid_about{
-    animation-name: showAboutMid;
-    animation-duration: 2s;
+
 }
