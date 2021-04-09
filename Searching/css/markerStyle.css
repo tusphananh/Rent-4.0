@@ -1,0 +1,39 @@
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.markerPoint{
+    background-color: #FE5F55;
+    background-size: cover;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.markerRadar{
+    background-color:rgba(100, 100, 100, 0.1);
+    border: 1px solid rgba(100, 100, 100, 0.2);
+    background-size: cover;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    animation: scan 1s infinite;
+    animation-fill-mode: forwards;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes scan {
+    from{
+        width: 20px;
+        height: 20px;
+    }
+    to{
+        width: 70px;
+        height: 70px;
+    }
+}
