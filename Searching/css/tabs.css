@@ -1,0 +1,228 @@
+@import 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,400';
+
+.tabContainer{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height:100%;
+  width: 20%;
+  margin-left:50px;
+  margin-right:50px
+}
+
+.tab {
+    overflow: hidden;
+    display:flex;
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover .underlineTab{
+    
+    display: inherit;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active .underlineTab {
+    
+    display: inherit;
+  }
+
+  .tab button:hover {
+    color : #B8D8D8;
+   
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+    color : #B8D8D8;
+    
+  }
+  
+  
+  /* Style the tab content */
+  .tabcontent {
+    margin:0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    position:relative;
+    
+  }
+
+  .tabcontent {
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+  }
+  
+  /* Go from zero to full opacity */
+  @keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+
+  
+  .underlineTab{
+    height:5px;
+    width:50px;
+    border-style: none;
+    background-color: #B8D8D8;
+    position: relative;
+    display: none;
+  }
+
+  .tablinks{
+    font-family: "Montserrat";
+    font-weight: bold;
+    color: #cccccc;
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @keyframes hide{
+    0% {
+      opacity:1; 
+    }
+    100%{
+      transform: scale(0);
+      opacity:0;
+      height:0;
+      margin:0;
+      line-height: 0;
+      padding: 0;
+    }
+
+  }
+  
+  .notiCard{
+    position: relative;
+    width: 70%;
+    height: 80px;
+    background-color: rgba( 0, 0, 0, 0.01 );
+    border-radius: 10px;
+    border: 1px solid rgba( 0, 0, 0, 0.05 );
+    transform: scale(1);
+    transition: 0.5s;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+   
+  }
+
+  .notiCard:hover{
+    transform: scale(1.1);
+  }
+  .enmergencyMode{
+    top: 5px;
+    left:5px;
+    position: absolute;
+    
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+.decline , .approve{
+  margin: 5px;
+  margin-right: 10px;
+  background-color: transparent; 
+  border-style:none;
+  border-radius:5px;
+  width: 100px;
+  transition:0.2s;
+  color: rgba(0,0,0,0.3);
+}
+
+.decline:hover {
+  color: #FE5F55;
+}
+
+.approve:hover{
+  color: #82f58d; 
+}
+
+#notiCard_container{
+  overflow-y: scroll;
+  width:130%;
+  height:80%;
+  margin-left: -20px;
+  position: relative;
+  
+}
+#notiCard_container::-webkit-scrollbar {
+  display: none;
+}
+
+.errorCircle{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+  
+.resultCard{
+  position: relative;
+  width: 400px;
+  height: 80px;
+  background-color: rgba( 0, 0, 0, 0.01 );
+  border-radius: 10px;
+  border: 1px solid rgba( 0, 0, 0, 0.05 );
+  transform: scale(1);
+  transition: 0.5s;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+ 
+}
+
+/* .resultCard:hover{
+   transform: scale(1.1);
+} */
+
+.resultCard:hover .resultApprove{
+  width:80px;
+  font-size:13px;
+}
+
+.resultCard:hover{
+  transform: scale(1.1);
+}
+
+.resultApprove{
+  position: relative;
+  transform: scale(1.0);
+  background: #35ff9c;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width: 10px;
+  font-size:0;
+  color:white;
+  height:100%;
+  transition:0.5s;
+  border:none;
+  border-radius: 0px 10px 10px 0px;
+  margin:0;
+  padding: 0;
+}

@@ -1,0 +1,30 @@
+:root{
+    --finalHeight : 50%;
+}
+
+#resultFrame{
+    height: 0;
+    width: 80%;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    overflow-y: scroll;
+    margin-left: -20px;
+}
+
+@keyframes open{
+    from {
+        height:0;
+    }
+    to {
+        height: var(--finalHeight);
+    }
+}   
+
+@keyframes close{
+    from {
+        height: var(--finalHeight);
+    }
+    to {
+        height:0
+    }
+}
