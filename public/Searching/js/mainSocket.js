@@ -1,5 +1,6 @@
 
-const socket = io.connect('ws://localhost:3000');
+var HOST = location.origin.replace(/^http/, 'ws')
+const socket = io.connect(HOST);
 
 var socketID
 
