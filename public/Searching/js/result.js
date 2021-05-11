@@ -21,8 +21,8 @@ function addResult(data){
 function addResult_card(result){
     const socketID = result.socketID
     const position = result.position
-    const distance = result.distance
-    const duration = result.duration
+    const distance = result.distance.toFixed(2)
+    const duration = result.duration.toFixed(2)
 
     const template = 
     ` 

@@ -14,10 +14,10 @@ searchButton.onclick = function(event) {
         searching = !searching
         if(searching){
             activityToken = Date.parse(new Date().toLocaleString())
-            searchSubmit(activityToken)
+            searchSubmit()
         }
         else{
-            cancelSubmit(activityToken)
+            cancelSubmit()
             activityToken = ''
         }
     }
