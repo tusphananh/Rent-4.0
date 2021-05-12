@@ -111,11 +111,29 @@
     }
 
   }
+
+  @keyframes expand-detail{
+    from{
+      height:90px
+    }
+    to{
+      height:300px
+    }
+  }
+
+  @keyframes close-detail{
+    from{
+      height:300px
+    }
+    to{
+      height:90px
+    }
+  }
   
   .notiCard{
     position: relative;
-    width: 70%;
-    height: 80px;
+    width: 300px;
+    height: 90px;
     background-color: rgba( 0, 0, 0, 0.01 );
     border-radius: 10px;
     border: 1px solid rgba( 0, 0, 0, 0.05 );
@@ -126,11 +144,12 @@
     margin-bottom: 20px;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
-   
+    overflow: hidden;
+    transform: scale(1);
   }
 
   .notiCard:hover{
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
   }
   .enmergencyMode{
     top: 5px;
@@ -144,7 +163,6 @@
 
 .decline , .approve{
   margin: 5px;
-  margin-right: 10px;
   background-color: transparent; 
   border-style:none;
   border-radius:5px;
@@ -225,4 +243,52 @@
   border-radius: 0px 10px 10px 0px;
   margin:0;
   padding: 0;
+}
+
+#detail-card{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  text-align:left;
+  width: 200px;
+  height: 200px;
+  margin-left:20px;
+
+}
+
+.detail-input{
+  border-style: none;
+  width: 200px;
+  height: 10px;
+  border-radius: 5px;
+  color: black;
+  font-weight: 300;
+  padding-top: 10px ;
+  padding-bottom: 10px;
+  background-color:transparent;
+}
+
+.detail-input::placeholder {
+  color:rgba(0, 0, 0,0.3);
+}
+
+.detail-header{
+  font-size: 10px; 
+  color: rgba(0, 0, 0, 0.5) ; 
+  font-weight: 800; 
+  letter-spacing: 1px;
+  margin-bottom:5px;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes growing{
+  from{}
+  to{transform:scale(1.1);color : #FE5F55}
+}
+@keyframes resize{
+  from{}
+  to{transform:scale(1);color : rgba(0, 0, 0, 0.5)}
+  
 }

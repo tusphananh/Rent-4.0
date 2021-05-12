@@ -107,134 +107,159 @@ function reDraw_Noti(){
         const template = 
         ` 
         <div class='notiCard' id=${activityToken}>
-            <div class="enmergencyMode" style ='background-color: ${modeColor};' ></div>
-            <div style='left: 25px;position: absolute;top:10px'>
-                <p style='margin:5px;font-size: 20px;font-weight: 800'>${item}</p>
-                <p style='margin:5px;font-size:12px;font-weight: 400; color:rgba(0, 0, 0, 0.5)'>About ${i.distance.toFixed(2)}km away</p>
+            <div class="enmergencyMode" style ='background-color: ${modeColor};'> </div>
+            <div style = 'width:300px ; height: 80px ; display: flex ;justify-content: center; position: relative; top:15px;left:15px; align: center'>
+                <div style='width:200px;position: relative; display: flex ; flex-direction : column;  align: center;justify-content: left'>
+                    <p style='margin:5px;font-size: 20px;font-weight: 800'>${item}</p>
+                    <p style='margin:5px;font-size:12px;font-weight: 400; color:rgba(0, 0, 0, 0.5)'>About ${i.distance.toFixed(2)}km away</p>
+                </div>
+                <div style='height:100%;display: flex;flex-direction: column; justify-content: right; align: center;position: relative; margin-right:0;margin-top:5px'>
+                    <button class="approve" value=${activityToken} onclick='notiApprove(event)'>Appove</button>
+                    <button class="decline" value=${activityToken} onclick='notiDecline(event)'>Decline</button>
+                </div>
             </div>
-            <div style='height:100%;display: flex;flex-direction: column; justify-content: center; right:0 ;position: absolute;'>
-                <button class="approve" value=${activityToken} onclick='notiApprove(event)'>Appove</button>
-                <button class="decline" value=${activityToken} onclick='notiDecline(event)'>Decline</button>
+
+            <div id='detail-card'>
+                <div style = 'height: 1px ; width:300px; background-color : rgba(0, 0, 0, 0.1) ; margin-bottom:10px;margin-left:-20px'></div>
+                <p id='brand-text' class='detail-header'>
+                    Brand
+                </p>
+                <input class="detail-input" type="text" id="brand" placeholder="Product's Brand" />
+
+                <p id='price-text' class='detail-header'>
+                    Price
+                </p>
+                <input class="detail-input" type="text" id="price" placeholder="Price" oninput='onInput_Price()'/>
+        
+                <p id='note-text' class='detail-header'>
+                    Note
+                </p>
+                <input class="detail-input" type="text" id="note" placeholder="Less than 50 Characters" />
             </div>
         </div>
         `
-
         notiTab.insertAdjacentHTML('beforeend',template)
     }
 }
-function openDetail(activityToken){
-    const template = 
-        ` 
-        <div id='detail-container'>
-        <div id='detail-card'>
-          <button class="detail-close" onclick='detailDecline()'>x</button>
-          <p style="font-size: 25px; color: #B8D8D8; font-weight: 800;">
-            WE NEED MORE INFORMATION
-          </p>
-          <p style="font-size: 20px; color: rgba(0, 0, 0, 0.5) ; font-weight: 800; letter-spacing: 5px;margin-bottom:10px">
-            PRICE
-          </p>
-          <input class="detail-input" type="text" id="price" placeholder="Price" />
-  
-          <div id="priceError" style="display: none; align-items: center; ">
-            <div class="errorCircle" style ='background-color: lightcoral; margin:5px' ></div>
-            <p style='color:lightcoral ;font-size:13px'>Please enter number type</p>
-          </div>
-  
-          <p style="font-size: 10px; color: rgba(0, 0, 0, 0.5) ; font-weight: 400;">
-            Your price will be compared in renter's result
-          </p>
-          <p style="font-size: 20px; color: rgba(0, 0, 0, 0.5) ; font-weight: 800; letter-spacing: 5px;margin-bottom:10px">
-            NOTE
-          </p>
-          <input class="detail-input" type="text" id="note" placeholder="Note" />
-          <div id="noteError" style="display: none; align-items: center; ">
-            <div class="errorCircle" style ='background-color: lightcoral; margin:5px' ></div>
-            <p style='color:lightcoral ;font-size:13px'>Please write less than 10 words</p>
-          </div>
-  
-          <p style="font-size: 10px; color: rgba(0, 0, 0, 0.5) ; font-weight: 400;">
-            Write less than 10 words
-          </p>
-          <button class="detail-approve" onclick='detailApprove(event)' value = ${activityToken}>SEND</button>
-        </div>
-      </div>
-        `
-
-    document.getElementsByTagName("BODY")[0].insertAdjacentHTML('beforeend',template)
+function detailNonErrorAnimation(id){
+    const object = document.getElementById(id)
+    object.style.animationName = 'resize' 
+    object.addEventListener('animationend' , ()=>{
+        object.style.transform = 'scale(1)'
+        object.style.color = 'rgba(0, 0, 0, 0.5)'
+    })
 }
-function detailApprove(event){
-    const price = document.getElementById('price').value
-    const note = document.getElementById('note').value
-    if(checkPrice(price) && checkNote(note)){
-        const activityToken = event.target.value
-        const index = getIndex_by_activityToken(activityToken)
-        console.log(activityToken)
-        console.log(index)
-        if(index !== -1){
-            search = noti[index]
-            sendResult(search,{
-                socketID : socketID,
-                position : currentPosition,
-                price : price,
-                note : note,
-                distance : search.distance,
-                duration : search.duration,
-            })
-            closeDetail()
-            removeNoti_by_activityToken(activityToken)
-        }
+
+function detailErrorAnimations(id){
+    const object = document.getElementById(id)
+    object.style.animationName = 'growing' 
+    object.addEventListener('animationend' , ()=>{
+        object.style.transform = 'scale(1.1)'
+        object.style.color = '#FE5F55'
+    })
+}
+
+function onInput_Price() {
+    const target = document.getElementById('price')
+    const input = parseFloat(target.value.replace(/,/g, ''))
+    if(isNaN(input)){
+        target.value = ''
     }
+    else{
+        target.value = input.toLocaleString()
+    }
+    
 }
-function detailDecline(event){
-    closeDetail()
-}
 
-function closeDetail(){
-    const container = document.getElementById('detail-container')
-    const card = document.getElementById('detail-card')
-    container.addEventListener('animationend',()=>{
-        container.remove()
-    })
-
-    card.addEventListener('animationend',()=>{
-        card.remove()
-    })
-
-    card.style.animationName = 'disappear'
-    container.style.animationName = 'fadeOut'
-
+function checkBrand(brand){
+    
+    if( brand == '' ){
+        detailErrorAnimations('brand-text')
+        return false
+    }
+    
+    detailNonErrorAnimation('brand-text')
+    return true
 }
 
 function checkPrice(price){
-    const error = document.getElementById('priceError')   
-    if( price == '' || isNaN(Number(price))){
-        error.style.display = 'flex'
+
+    if( price == '' ){
+        detailErrorAnimations('price-text')
         return false
     }
-    error.style.display = 'none'
+    detailNonErrorAnimation('price-text')
     return true
 }
 function checkNote(note){
-    const error = document.getElementById('noteError')
+  
     if(note.length > 50){
-        error.style.display = 'flex'
+        detailErrorAnimations('note-text')
         return false
     }
-    error.style.display = 'none'
+    detailNonErrorAnimation('note-text')
     return true
 }
 
+function closeDetail(notiCard){
+    notiCard.style.transform = 'scale(1)'
+    notiCard.style.animationName = 'close-detail'
+    notiCard.addEventListener('animationend', ()=>{
+        notiCard.style.transform = 'scale(1)'
+        notiCard.style.height = '90px'
+    })
+}
+function openDetail(notiCard){
+    notiCard.style.transform = 'scale(1.1)'
+    notiCard.style.animationName = 'expand-detail'
+    notiCard.addEventListener('animationend', ()=>{
+        notiCard.style.height = '300px'
+        notiCard.style.transform = 'scale(1.1)'
+    })
+}
 function notiApprove(e){
     const activityToken = e.target.value
-    openDetail(activityToken)
-    console.log('notiApprove')
+    const notiCard = document.getElementById(activityToken)
+   
+    if(notiCard.style.height == '90px' || notiCard.style.height == '' ){
+        openDetail(notiCard)
+    }
+    else{
+        const brand = document.getElementById('brand').value
+        const price = document.getElementById('price').value
+        const note = document.getElementById('note').value
+        if(checkBrand(brand) && checkPrice(price) && checkNote(note)){
+            const activityToken = e.target.value
+            const index = getIndex_by_activityToken(activityToken)
+            if(index !== -1){
+                search = noti[index]
+                sendResult(search,{
+                    socketID : socketID,
+                    position : currentPosition,
+                    brand:brand,
+                    price : price,
+                    note : note,
+                    distance : search.distance,
+                    duration : search.duration,
+                })
+                
+                removeNoti_by_activityToken(activityToken)
+            }
+        }
+    }
     
 }
 
 function notiDecline(e){
-    console.log('notiDecline')
-    removeNoti_by_activityToken(e.target.value)
+    const activityToken = e.target.value
+    const notiCard = document.getElementById(activityToken)
+    if(notiCard.style.height == '90px'){
+        removeNoti_by_activityToken(e.target.value)
+    }
+    else{
+        closeDetail(notiCard)
+    }
+    
 }
 
 // function hide(e){

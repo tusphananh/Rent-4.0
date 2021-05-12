@@ -13,7 +13,8 @@ searchButton.onclick = function(event) {
     if(mapLoaded && checkItem()){
         searching = !searching
         if(searching){
-            activityToken = Date.parse(new Date().toLocaleString())
+            token = new Date().getTime()
+            activityToken = token.toString()
             searchSubmit()
         }
         else{
