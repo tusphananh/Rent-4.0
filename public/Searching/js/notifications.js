@@ -16,7 +16,6 @@ function sendNoti(data) {
 
     if(checkNear(guest_socketID,guest_position,6)){
         dis_dur = get_Dis_and_Dura(currentPosition,guest_position)
-        console.log(dis_dur)
         if(dis_dur){
             const notification = {
             activityToken: guest_activityToken,
@@ -207,6 +206,7 @@ function closeDetail(notiCard){
     notiCard.addEventListener('animationend', ()=>{
         notiCard.style.transform = 'scale(1)'
         notiCard.style.height = '90px'
+        notiCard.style.marginBottom = '20px'
     })
 }
 function openDetail(notiCard){
@@ -215,6 +215,7 @@ function openDetail(notiCard){
     notiCard.addEventListener('animationend', ()=>{
         notiCard.style.height = '300px'
         notiCard.style.transform = 'scale(1.1)'
+        notiCard.style.marginBottom = '40px'
     })
 }
 function notiApprove(e){
@@ -237,7 +238,7 @@ function notiApprove(e){
                     socketID : socketID,
                     position : currentPosition,
                     brand:brand,
-                    price : price,
+                    price : parseFloat(price.replace(/,/g, '')),
                     note : note,
                     distance : search.distance,
                     duration : search.duration,

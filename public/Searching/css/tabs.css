@@ -117,7 +117,8 @@
       height:90px
     }
     to{
-      height:300px
+      height:300px;
+      margin-bottom: 40px;
     }
   }
 
@@ -126,7 +127,8 @@
       height:300px
     }
     to{
-      height:90px
+      height:90px;
+      margin-bottom: 20px;
     }
   }
   
@@ -200,7 +202,7 @@
 .resultCard{
   position: relative;
   width: 400px;
-  height: 80px;
+  height: 100px;
   background-color: rgba( 0, 0, 0, 0.01 );
   border-radius: 10px;
   border: 1px solid rgba( 0, 0, 0, 0.05 );
@@ -219,7 +221,7 @@
 } */
 
 .resultCard:hover .resultApprove{
-  width:80px;
+  width:100px;
   font-size:13px;
 }
 
