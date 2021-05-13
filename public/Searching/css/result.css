@@ -3,12 +3,13 @@
 }
 
 #resultFrame{
-    height: 0;
+    height: 0px;
     width: 80%;
     animation-duration: 1s;
     animation-fill-mode: forwards;
     overflow-y: scroll;
     margin-left: -20px;
+  
 }
 
 @keyframes open{

@@ -36,17 +36,34 @@ function addResult_card(result){
 
     const template = 
     ` 
-    <div class='resultCard' id='123' onmouseenter = resultMouseEnter(event) onmouseleave = resultMouseLeave(event)>
-            <div style='left: 25px;position: absolute;top:10px'>
-                <p style='margin:5px;font-size: 20px;font-weight: 800;align-self: flex-end;'>${brand} </p>
-                <p style='margin:5px;font-size: 15px;font-weight: 600 ;color:rgba(0, 0, 0, 0.5);align-self: flex-end;'>${price.toLocaleString()} VND</p>
-                
-                <p style='margin:5px;font-size:12px;font-weight: 400; color:rgba(0, 0, 0, 0.5)'>Anout ${distance} km and ${duration} minute</p>
-            </div>
-            <div style='height:100%;display: flex;flex-direction: column; justify-content: center; right:0 ;position: absolute;'>
-                <button class="resultApprove" value=${socketID} onclick='resultApprove(event)'>Appove</button>
-            </div>
-          </div>
+    <div class='resultCard' id=${socketID} onmouseenter = 'resultMouseEnter(event)' onmouseleave = 'resultMouseLeave(event)' >
+        <div style='position: relative ; width: 100% ; height: 60px'>
+            <p style='margin:10px;margin-top:10px;font-size: 20px;font-weight: 800;align-self: flex-end;'>${brand} </p>
+            <p style='margin:10px;font-size: 15px;font-weight: 600 ;color:rgba(0, 0, 0, 0.5);align-self: flex-end;'>${price.toLocaleString()} VND</p>
+        </div>
+        <div style = 'height: 1px ;width:100%; background-color : rgba(0, 0, 0, 0.1) ; margin-bottom:10px;margin-top:10px;'></div>
+        <div id='result-detail-card'>
+        
+            <p class='result-detail-header'>
+                Note
+            </p>
+            <p style='margin:5px;font-size:12px;font-weight: 400; color:rgba(0, 0, 0, 0.5)'>${note}</p>
+            <p  class='result-detail-header'>
+                Distance 
+            </p>
+            <p style='margin:5px;font-size:12px;font-weight: 400; color:rgba(0, 0, 0, 0.5)'>Anout ${distance} km </p>
+            <p  class='result-detail-header'>
+                Duration
+            </p>
+            <p style='margin:5px;font-size:12px;font-weight: 400; color:rgba(0, 0, 0, 0.5)'>Take ${duration} minutes </p>
+        
+        </div>
+        <div style = 'height: 1px ; width:100%; background-color : rgba(0, 0, 0, 0.1) ; margin-bottom:10px;margin-top:10px;'></div>
+        <div style="display: flex; justify-content: center;align-items: center; width:100% ; height:20px">
+            <button class="resultApprove" value=${socketID} onclick='resultApprove(event)'>Appove</button>
+        </div>
+        
+    </div>
     `
     
     resultFrame.insertAdjacentHTML('beforeend',template)
@@ -56,6 +73,25 @@ function addResult_card(result){
 function resultApprove(e){
 
 }
+function closeResultDetail(target){
+    target.style.animationName = 'result-resize'
+        target.addEventListener('animationend', ()=>{
+            target.style.transform = 'scale(1)'
+            target.style.height = '80px'
+            target.style.marginLeft = '20px'
+            
+        })
+    
+}
+function openResultDetail(target){
+    target.style.animationName = 'result-expand'
+        target.addEventListener('animationend', ()=>{
+            target.style.height = '290px'
+            target.style.transform = 'scale(1.1)'
+            target.style.marginLeft = '30px'
+           
+        })
+}
 
 function clearResult(){
     resultSet.splice(0, resultSet.length)
@@ -63,16 +99,20 @@ function clearResult(){
 }
 
 function resultMouseEnter(e){
-    const socketID = e.target.id
+    console.log(e.target.value)
+    const target = e.target
+    const socketID = target.id
     const index = getResultIndex_by_Socket(socketID) 
     if ( index !== -1){
         const position = resultSet[index].position
         flyTo(position,14)
     }
-    
+    openResultDetail(target)
 }
 
 function resultMouseLeave(e){
+    const target = e.target
+    closeResultDetail(target)
     flyCurrent(12)
 }
 

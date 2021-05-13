@@ -105,7 +105,7 @@ function reDraw_Noti(){
         }
         const template = 
         ` 
-        <div class='notiCard' id=${activityToken}>
+        <div class='notiCard' isClosed="true" id=${activityToken}>
             <div class="enmergencyMode" style ='background-color: ${modeColor};'> </div>
             <div style = 'width:300px ; height: 80px ; display: flex ;justify-content: center; position: relative; top:15px;left:15px; align: center'>
                 <div style='width:200px;position: relative; display: flex ; flex-direction : column;  align: center;justify-content: left'>
@@ -196,6 +196,7 @@ function checkNote(note){
         detailErrorAnimations('note-text')
         return false
     }
+    
     detailNonErrorAnimation('note-text')
     return true
 }
@@ -222,13 +223,18 @@ function notiApprove(e){
     const activityToken = e.target.value
     const notiCard = document.getElementById(activityToken)
    
-    if(notiCard.style.height == '90px' || notiCard.style.height == '' ){
+    if(notiCard.getAttribute('isClosed') == 'true'){
+        
         openDetail(notiCard)
+        notiCard.setAttribute('isClosed','false')
     }
     else{
         const brand = document.getElementById('brand').value
         const price = document.getElementById('price').value
-        const note = document.getElementById('note').value
+        let note = document.getElementById('note').value
+        if(note == ''){
+            note = 'None'
+        }
         if(checkBrand(brand) && checkPrice(price) && checkNote(note)){
             const activityToken = e.target.value
             const index = getIndex_by_activityToken(activityToken)
@@ -254,11 +260,12 @@ function notiApprove(e){
 function notiDecline(e){
     const activityToken = e.target.value
     const notiCard = document.getElementById(activityToken)
-    if(notiCard.style.height == '90px'){
+    if(notiCard.getAttribute('isClosed') == 'true'){
         removeNoti_by_activityToken(e.target.value)
     }
     else{
         closeDetail(notiCard)
+        notiCard.setAttribute('isClosed','true')
     }
     
 }
