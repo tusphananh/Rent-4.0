@@ -1,6 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoidHVzcGhhbmFuaCIsImEiOiJja244eDFyMGkwM3R5MnVvbzI1eWZsYzNuIn0.jm4MGKDtKDMBpLz8IUXyAA';
 
-
 var map
 let mapLoaded = false
 

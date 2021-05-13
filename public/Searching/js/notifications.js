@@ -9,8 +9,6 @@ function sendNoti(data) {
     let guest_activityToken = data.activityToken
     let guest_socketID = data.socketID
     let guest_position = data.position
-    let isSearching = data.isSearching
-    let guest_searching = data.isSearching
     let guest_isEnmergency = data.isEnmergency
     let item = data.item
 
@@ -24,15 +22,9 @@ function sendNoti(data) {
             pos : guest_position,
             distance : dis_dur.distance,
             duration : dis_dur.duration, 
-            isSearching: guest_searching,
             isEnmergency : guest_isEnmergency
             }
-            if(isSearching){
-                addNoti(notification)
-            }
-            else{
-                removeNoti(notification)
-            }
+            addNoti(notification)
         }
     }
 }
@@ -126,7 +118,7 @@ function reDraw_Noti(){
                 <input class="detail-input" type="text" id="brand" placeholder="Product's Brand" />
 
                 <p id='price-text' class='detail-header'>
-                    Price
+                    Price per a hour
                 </p>
                 <input class="detail-input" type="text" id="price" placeholder="Price" oninput='onInput_Price()'/>
         
@@ -241,6 +233,7 @@ function notiApprove(e){
             if(index !== -1){
                 search = noti[index]
                 sendResult(search,{
+                    activityToken : activityToken,
                     socketID : socketID,
                     position : currentPosition,
                     brand:brand,

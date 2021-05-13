@@ -4,9 +4,12 @@ const socket = io.connect(HOST);
 
 var socketID
 
+
+
 socket.on('connect', data =>{
     socketID = socket.id 
 })
+
 
 socket.on('noti',data => {
     if( typeof currentPosition !== "undefined"){
@@ -20,7 +23,18 @@ socket.on('noti',data => {
     }
 })
 
+socket.on('remove-search',data=>{
+    if( typeof currentPosition !== "undefined"){
+        removeNoti_by_activityToken(data.activityToken)
+    }
+    
+})
+
 
 socket.on('result',data =>{
     addResult(data)
+})
+
+socket.on('remove-result',data =>{
+    hideResultCardBySocketID(data.socketID)
 })

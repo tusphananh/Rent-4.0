@@ -45,7 +45,7 @@ function cancelSubmit(){
     flyCurrent(15)
     resultFrame.style.animationName = "close";
     searchButton.innerText = 'SEARCH'
-    emitSearch_socket()
+    removeSearch_socket()
     clearResult()
     clearResultMarkers()
 }
@@ -82,8 +82,14 @@ function emitSearch_socket(){
         socketID: socketID,
         item : searchBox[0].value,
         position: currentPosition,
-        isSearching: searching,
         isEnmergency : isEnmergency
+    })
+
+}
+
+function removeSearch_socket(){
+    socket.emit('remove-search',{
+        activityToken : activityToken
     })
 
 }

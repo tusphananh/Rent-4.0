@@ -14,7 +14,7 @@
 
 @keyframes open{
     from {
-        height:0;
+        height:0px;
     }
     to {
         height: var(--finalHeight);
@@ -26,6 +26,6 @@
         height: var(--finalHeight);
     }
     to {
-        height:0
+        height:0px
     }
 }
