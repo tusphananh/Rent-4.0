@@ -1,69 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head><title>Rent everything</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
 
-    <script defer src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
-    <script defer src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
-    <script defer src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    
-    <script defer src="/Searching/js/loadMap.js"></script>
-    <script defer src="/Searching/js/result.js"></script>
-    <script defer src="/Searching/js/search.js"></script>
-    <script defer src="/Searching/js/tabNavigation.js"></script>
-    <script defer src="/Searching/js/notifications.js"></script>
-    <script defer src="/Searching/js/activities.js"></script>
-    <script defer src="/Searching/js/mainSocket.js"></script>
+<head>
+  <title>Rent everything</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 
-    <link rel="stylesheet" href="/Searching/css/markerStyle.css" />
-    <link rel="stylesheet" href="/Searching/css/loadingStyle.css" />
-    <link rel="stylesheet" href="/Searching/css/mainStyle.css" />
-    <link rel="stylesheet" href="/Searching/css/toggleStyle.css" />
-    <link rel="stylesheet" href="/Searching/css/result.css" />
-    <link rel="stylesheet" href="/Searching/css/tabs.css" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
 
-  </head>
-  <body>
+  <link rel="stylesheet" href="/Searching/css/activities.css" />
+  <link rel="stylesheet" href="/Searching/css/markerStyle.css" />
+  <link rel="stylesheet" href="/Searching/css/loadingStyle.css" />
+  <link rel="stylesheet" href="/Searching/css/mainStyle.css" />
+  <link rel="stylesheet" href="/Searching/css/toggleStyle.css" />
+  <link rel="stylesheet" href="/Searching/css/result.css" />
+  <link rel="stylesheet" href="/Searching/css/tabs.css" />
 
-    <!-- Logo HERE -->
-    
-    <h1
-      style="
+  <script defer src="https://cdn.socket.io/socket.io-3.0.0.js"></script>
+  <script defer src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+  <script defer src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+  <script defer src="/Searching/js/activities.js"></script>
+  <script defer src="/Searching/js/template.js"></script>
+  <script defer src="/Searching/js/loadMap.js"></script>
+  <script defer src="/Searching/js/result.js"></script>
+  <script defer src="/Searching/js/search.js"></script>
+  <script defer src="/Searching/js/tabNavigation.js"></script>
+  <script defer src="/Searching/js/notifications.js"></script>
+  <script defer src="/Searching/js/mainSocket.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Logo HERE -->
+
+  <h1 style="
         color: #7a9e9f;
         font-weight: 900;
         position: relative;
         font-size: 50px;
         margin:0
-      "
-      >
-        Ree
-    </h1>
+      ">
+    Ree
+  </h1>
 
-    <div style='display:flex;
+  <div style='display:flex;
     position: relative;
-  
+    justify-content: center;
     width: 100vw; 
     height: 90vh;'>
 
-      <div class='tabContainer'>
-        <div class="tab">
-          <button class="tablinks" onclick="openCity(event, 'notifications')">Notifications
-            <hr class='underlineTab'>
-          </button>
-          <button class="tablinks" onclick="openCity(event, 'activities')">Activities
-            <hr class='underlineTab'>
-          </button>
-          <button class="tablinks" onclick="openCity(event, 'message')">Message
-            <hr class='underlineTab'></button>
-        </div>
+    <div class='tabContainer'>
+      <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'notifications')">Notifications
+          <hr class='underlineTab'>
+        </button>
+        <button class="tablinks" onclick="openCity(event, 'activities')">Activities
+          <hr class='underlineTab'>
+        </button>
+        <button class="tablinks" onclick="openCity(event, 'message')">Message
+          <hr class='underlineTab'>
+        </button>
+      </div>
 
-        <div id="notifications" class="tabcontent" name="notifications">
-           <!-- FILTERS -->
+      <div id="notifications" class="tabcontent" name="notifications">
+        <!-- FILTERS -->
 
-          <div>
-            <button style='border: 2px solid rgba(0,0,0,0.1);
+        <div>
+          <button style='border: 2px solid rgba(0,0,0,0.1);
             background-color:white;
             border-radius:5px;
             display: flex;
@@ -71,106 +75,114 @@
             justify-content:center;
             align-items: center;'>
 
-              <img src="/Searching/images/filter.png" style='width:15px' alt="">
-              <p style='margin:2px'>Filters</p>
-            </button>
-          </div>
+            <img src="/Searching/images/filter.png" style='width:15px' alt="">
+            <p style='margin:2px'>Filters</p>
+          </button>
+        </div>
 
-          <h3>Sort by</h3>
+        <h3>Sort by</h3>
 
-          <div id="notiCard_container" >
-            
+        <div id="notiCard_container">
+
+          <!-- CARDS -->
+
+        </div>
+
+      </div>
+
+
+      <div id="activities" class="tabcontent" name="activities">
+        <h3>Activities</h3>
+        <div style="display: flex;flex-direction: column; width: 100%;height: 100%;">
+          <p style="color:rgba(0, 0, 0, 0.5)">Recent</p>
+
+
+          <div id='activities-recent-container'>
             <!-- CARDS -->
             
           </div>
-        
-        </div>
-       
-        
-        <div id="activities" class="tabcontent" name="activities">
-          <h3>Activities</h3>
-         
-        </div>
-        
-        <div id="message" class="tabcontent" name="message">
-          <h3>Message</h3>
-        
+
+          <p style="color:rgba(0, 0, 0, 0.5)"">History</p>
+            
+
+        <div id='activities-history-container'>
+          
         </div>
       </div>
 
-        <!-- Search Frame -->
+    </div>
+
+    <div id="message" class="tabcontent" name="message">
+          <h3>Message</h3>
+
+        </div>
+      </div>
+
+      <!-- Search Frame -->
       <div class="searchFrame">
         <!-- SEARCH FIELD + MODE + SUGGESTION -->
-        
-       <!-- SEARCH + EMERGENCY MODE HERE -->
+
+        <!-- SEARCH + EMERGENCY MODE HERE -->
         <div style="display: flex; position: relative">
           <!-- SEARCH FIELD -->
           <input class="searchBox" type="text" name="searchBox" placeholder="Item" />
           <!-- EMERGENCY MODE -->
           <div style="display: flex; flex-direction: column; margin-left: 10px">
             <label class="form-switch">
-              <input type="checkbox"  onclick="isEnmergency_click(event)"/>
+              <input type="checkbox" onclick="isEnmergency_click(event)" />
               <i></i>
             </label>
-            <div
-              style="
+            <div style="
                 display: flex;
                 justify-content: center;
                 align-items: center;
-              "
-            >
+              ">
               <p style="font-size: 10px; color: rgba(0, 0, 0, 0.5)">
                 Enmergency Mode
               </p>
-              <img
-                src="/Searching/images/question.png"
-                alt=""
-                style="width: 10px; height: 10px; margin-left: 5px"
-              />
+              <img src="/Searching/images/question.png" alt="" style="width: 10px; height: 10px; margin-left: 5px" />
             </div>
           </div>
         </div>
 
         <div id="itemError" style="display: none; align-items: center; ">
-          <div class="errorCircle" style ='background-color: lightcoral; margin:5px' ></div>
+          <div class="errorCircle" style='background-color: lightcoral; margin:5px'></div>
           <p style='color:lightcoral ;font-size:13px'>Please enter your item name</p>
         </div>
 
         <!-- SUGGESTION HERE -->
         <div style="position: relative">
-          <button class="suggestButton" id='backup_charger' onclick="sorted(event)" value='Backup Charger'>Backup Charger</button>
+          <button class="suggestButton" id='backup_charger' onclick="sorted(event)" value='Backup Charger'>Backup
+            Charger</button>
           <button class="suggestButton" id='car' onclick="sorted(event)" value='Car'>Car</button>
           <button class="suggestButton" id='bike' onclick="sorted(event)" value='Bike'>Bike</button>
           <button class="suggestButton" id='camera' onclick="sorted(event)" value='Camera'>Camera</button>
         </div>
 
-          <!-- RESULT HERE -->
-          <div id='resultFrame'>
-              
-          </div>
-  
-
+        <!-- RESULT HERE -->
+        <div id='resultFrame'></div>
         <!-- SEARCH BUTTON HERE -->
         <div class='searchButtonFrame'>
           <button id="searchButton">SEARCH</button>
-          <p style="font-weight:300;font-size: 13px; color: rgba(0, 0, 0, 0.5);margin-top: 20px ; margin-left:20px;">Let's go here</p>
+          <p style="font-weight:300;font-size: 13px; color: rgba(0, 0, 0, 0.5);margin-top: 20px ; margin-left:20px;">
+            Let's
+            go here</p>
         </div>
       </div>
 
       <!-- MAP HERE -->
       <div class='mapContainer'>
         <div class="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
         </div>
         <div id="map"></div>
       </div>
+
+
     </div>
+</body>
 
-
-  </body>
-  
 </html>
-

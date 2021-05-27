@@ -54,6 +54,14 @@ io.on('connect', socket => {
         io.to(data.search.socketID).emit('result',data.result)
     })
 
+    socket.on('activities',data => {
+        io.to(data.guestSocketID).emit('activities',data)
+    })
+    
+    socket.on('message',data => {
+        console.log(`send message to ${data.socketID}`)
+        io.to(data.socketID).emit('message',data)
+    })
 });
 
 http.listen(PORT, () => console.log(`listening on ${PORT}`));

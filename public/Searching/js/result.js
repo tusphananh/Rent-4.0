@@ -13,19 +13,21 @@ function addResult(data){
     let note = data.note
     let distance = data.distance
     let duration = data.duration
-    let guest_socketID = data.socketID
-    let guest_position = data.position
+    let guestSocketID = data.socketID
+    let guestPosition = data.position
     let activityToken = data.activityToken
 
     const result = {
-        activityToken :activityToken,
-        socketID: guest_socketID,
-        position: guest_position,
+        activityToken : activityToken,
         brand:brand,
         price : price,
         note : note,
         distance: distance,
         duration: duration,
+        guestPosition : guestPosition,
+        guestSocketID: guestSocketID,
+        ownerPosition : currentPosition,
+        ownerSocketID: socketID
     }
 
     resultSet.push(result)
@@ -37,48 +39,26 @@ function addResult_card(result){
     let price = result.price
     let note = result.note
     const socketID = result.socketID
-    const position = result.position
+    const position = result.guestPosition
     const distance = result.distance.toFixed(2)
     const duration = result.duration.toFixed(2)
+    const activityToken = result.activityToken
 
-    const template = 
-    ` 
-    <div class='resultCard' id=${socketID} onmouseenter = 'resultMouseEnter(event)' onmouseleave = 'resultMouseLeave(event)' >
-        <div style='position: relative ; width: 100% ; height: 80px;display:flex; flex-direction: column; text-align:left ; justify-content: center;padding-left: 15px;border-bottom:1px solid rgba(0, 0, 0, 0.1)'>
-            <p style='margin:0 ;font-size: 20px;font-weight: 800;'>${brand} </p>
-            <p style='margin:0 ; font-size: 15px;font-weight: 600 ;color:rgba(0, 0, 0, 0.5);'>${price.toLocaleString()} VND/hour</p>
-        </div>
-        <div id='result-detail-card'>
-        
-            <p class='result-detail-header'>
-                Note
-            </p>
-            <p style='margin-left:5px;margin-top:0;font-size:12px;font-weight: 400; color:rgba(0, 0, 0, 0.5)'>${note}</p>
-            <p  class='result-detail-header'>
-                Distance 
-            </p>
-            <p style='margin-left:5px;margin-top:0;font-size:12px;font-weight: 400; color:rgba(0, 0, 0, 0.5)'>About ${distance} km </p>
-            <p  class='result-detail-header'>
-                Duration
-            </p>
-            <p style='margin-left:5px;margin-top:0;font-size:12px;font-weight: 400; color:rgba(0, 0, 0, 0.5)'>Take ${duration} minutes </p>
-        
-        </div>
-        <div style = 'height: 1px ; width:100%; background-color : rgba(0, 0, 0, 0.1) ; margin-bottom:10px;margin-top:0px;'></div>
-        <div style="display: flex; justify-content: center;align-items: center; width:100% ; height:20px">
-            <button class="resultApprove" value=${socketID} onclick='resultApprove(event)'>Appove</button>
-        </div>
-        
-    </div>
-    `
-    
+    const template = resultCardTemplate(activityToken,socketID,brand,price,note,distance,duration) 
     resultFrame.insertAdjacentHTML('beforeend',template)
     markerSet.push(addMarker_result(position))
 }
 
 function resultApprove(e){
     searching = false;
-    cancelSubmit()
+    const activityToken = e.target.getAttribute('activityToken')
+    const data = resultSet[getResultIndex_by_ActivityToken(activityToken)]
+    if(data){
+        addActivityCard(data)
+        socket.emit('activities',data)
+        cancelSubmit()
+    }
+    
 }
 function closeResultDetail(target){
     target.style.animationName = 'result-resize'
@@ -119,6 +99,15 @@ function resultMouseLeave(e){
     const target = e.target
     closeResultDetail(target)
     flyCurrent(12)
+}
+function getResultIndex_by_ActivityToken(activityToken){
+    for(let i = 0; i < resultSet.length; i++){
+        if(resultSet[i].activityToken == activityToken){
+            return i
+        }
+    }
+
+    return -1
 }
 
 function getResultIndex_by_Socket(socketID){

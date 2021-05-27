@@ -35,6 +35,14 @@ socket.on('result',data =>{
     addResult(data)
 })
 
+socket.on('message',data =>{
+    addGuestMessage(data.activityToken , data.message)
+})
+
 socket.on('remove-result',data =>{
     hideResultCardBySocketID(data.socketID)
+})
+
+socket.on('activities',data =>{
+    addActivityCard(data)
 })

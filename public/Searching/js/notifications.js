@@ -91,44 +91,12 @@ function reDraw_Noti(){
     for (const i of getNoti()){
         let modeColor = green
         let item = i.item
+        let distance = i.distance.toFixed(2)
         let activityToken = i.activityToken
         if(i.isEnmergency){
             modeColor = red
         }
-        const template = 
-        ` 
-        <div class='notiCard' isClosed="true" id=${activityToken}>
-            <div class="enmergencyMode" style ='background-color: ${modeColor};'> </div>
-            <div style = 'width:300px ; height: 80px ; display: flex ;justify-content: center; position: relative; top:15px;left:15px; align: center'>
-                <div style='width:200px;position: relative; display: flex ; flex-direction : column;  align: center;justify-content: left'>
-                    <p style='margin:5px;font-size: 20px;font-weight: 800'>${item}</p>
-                    <p style='margin:5px;font-size:12px;font-weight: 400; color:rgba(0, 0, 0, 0.5)'>About ${i.distance.toFixed(2)}km away</p>
-                </div>
-                <div style='height:100%;display: flex;flex-direction: column; justify-content: right; align: center;position: relative; margin-right:0;margin-top:5px'>
-                    <button class="approve" value=${activityToken} onclick='notiApprove(event)'>Appove</button>
-                    <button class="decline" value=${activityToken} onclick='notiDecline(event)'>Decline</button>
-                </div>
-            </div>
-
-            <div id='detail-card'>
-                <div style = 'height: 1px ; width:300px; background-color : rgba(0, 0, 0, 0.1) ; margin-bottom:10px;margin-left:-20px'></div>
-                <p id='brand-text' class='detail-header'>
-                    Brand
-                </p>
-                <input class="detail-input" type="text" id="brand" placeholder="Product's Brand" />
-
-                <p id='price-text' class='detail-header'>
-                    Price per a hour
-                </p>
-                <input class="detail-input" type="text" id="price" placeholder="Price" oninput='onInput_Price()'/>
-        
-                <p id='note-text' class='detail-header'>
-                    Note
-                </p>
-                <input class="detail-input" type="text" id="note" placeholder="Less than 50 Characters" />
-            </div>
-        </div>
-        `
+        const template = notificationCardTemplate(activityToken,modeColor,item,distance)
         notiTab.insertAdjacentHTML('beforeend',template)
     }
 }
