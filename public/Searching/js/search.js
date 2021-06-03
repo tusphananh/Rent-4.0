@@ -3,6 +3,48 @@ let isEnmergency = false;
 var activityToken 
 const searchButton = document.getElementById('searchButton')
 
+searchSuggestions = ['Car','Bike','Phone','Batery','Backup','Book']
+
+function getMatchSearch(text){
+  const result = []
+  if (text != ''){
+    console.log('no empty')
+    for ( i = 0; i < searchSuggestions.length; i++ ){
+      let suggestText = searchSuggestions[i]
+      console.log(suggestText)
+      if(suggestText.toLowerCase().includes(text.toLowerCase())){
+        console.log('true')
+        result.push(suggestText)
+      }
+    }
+  }
+  return result
+}
+
+function expandSuggestions(e){
+  const suggestionContainer = document.getElementById('suggestions-container')
+  const suggestions = getMatchSearch(e.target.value)
+  const length = suggestions.length
+  console.log(suggestions)
+  suggestionContainer.innerHTML = ''
+  if (length > 0){
+     suggestionContainer.style.display = 'flex'
+     for (i = 0; i < length; i++ ){
+        suggestionContainer.insertAdjacentHTML('beforeend',suggestionTemplate(suggestions[i]))
+      }
+  }
+  else{
+    suggestionContainer.style.display = 'none'
+  }
+}
+
+
+function sugesstionClick(e){
+  const searchBox = document.getElementById('search-box')
+  searchBox.value = e.target.value
+  const suggestionContainer = document.getElementById('suggestions-container')
+  suggestionContainer.style.display = 'none'
+}
 
 resultFrame.addEventListener('animationend', ()=>{
     searchButton.disabled =false
@@ -52,7 +94,7 @@ function cancelSubmit(){
 
 
 var suggestButtons = ''
-const searchBox = document.getElementsByClassName('searchBox')
+const searchBox = document.getElementById('search-box')
 function sorted(e){
     target = e.currentTarget
     objectName = target.id
@@ -64,13 +106,13 @@ function sorted(e){
     
     if (suggestButtons == objectName){
         suggestButtons = ''
-        searchBox[0].value = ''
+        searchBox.value = ''
     }
     else{
         suggestButtons = objectName
         target.style.color = '#B8D8D8'
         target.style.border = '2px solid #B8D8D8'
-        searchBox[0].value = target.value
+        searchBox.value = target.value
     }
     
     
@@ -80,7 +122,7 @@ function emitSearch_socket(){
     socket.emit('search',{
         activityToken : activityToken,
         socketID: socketID,
-        item : searchBox[0].value,
+        item : searchBox.value,
         position: currentPosition,
         isEnmergency : isEnmergency
     })
@@ -96,7 +138,7 @@ function removeSearch_socket(){
 
 const itemError = document.getElementById('itemError')
 function checkItem(){
-    if (searchBox[0].value == ''){
+    if (searchBox.value == ''){
         itemError.style.display = 'flex'
         return false
     }

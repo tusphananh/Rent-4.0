@@ -150,3 +150,10 @@ function guestMessageTemplate(message) {
       </div>
     </div>`;
 }
+
+function suggestionTemplate(text){
+  return `<button class='suggestion' value=${text} onclick ='sugesstionClick(event)' >
+  ${text}
+  </button>
+  `
+}

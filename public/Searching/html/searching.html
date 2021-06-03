@@ -7,6 +7,7 @@
 
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="/Searching/css/account.css" />
   <link rel="stylesheet" href="/Searching/css/activities.css" />
   <link rel="stylesheet" href="/Searching/css/markerStyle.css" />
   <link rel="stylesheet" href="/Searching/css/loadingStyle.css" />
@@ -32,17 +33,6 @@
 
 <body>
 
-  <!-- Logo HERE -->
-
-  <h1 style="
-        color: #7a9e9f;
-        font-weight: 900;
-        position: relative;
-        font-size: 50px;
-        margin:0
-      ">
-    Ree
-  </h1>
 
   <div style='display:flex;
     position: relative;
@@ -51,6 +41,20 @@
     height: 90vh;'>
 
     <div class='tabContainer'>
+
+      <!-- Logo HERE -->
+
+      <h1 style="
+      color: #7a9e9f;
+      font-weight: 900;
+      position: relative;
+      font-size: 50px;
+      margin:0;
+      margin-left: 13px;
+      ">
+        Ree
+      </h1>
+
       <div class="tab">
         <button class="tablinks" onclick="openCity(event, 'notifications')">Notifications
           <hr class='underlineTab'>
@@ -58,7 +62,7 @@
         <button class="tablinks" onclick="openCity(event, 'activities')">Activities
           <hr class='underlineTab'>
         </button>
-        <button class="tablinks" onclick="openCity(event, 'message')">Message
+        <button class="tablinks" onclick="openCity(event, 'account')">Account
           <hr class='underlineTab'>
         </button>
       </div>
@@ -99,7 +103,7 @@
 
           <div id='activities-recent-container'>
             <!-- CARDS -->
-            
+
           </div>
 
           <p style="color:rgba(0, 0, 0, 0.5)"">History</p>
@@ -112,9 +116,22 @@
 
     </div>
 
-    <div id="message" class="tabcontent" name="message">
-          <h3>Message</h3>
-
+    <div id="account" class="tabcontent" name="account">
+          <h3>Account</h3>
+          <div class="account-container">
+            <div class="account-button-container">
+              <button class="account-button">Settings</button>
+            </div>
+            <div class="account-button-container">
+              <button class="account-button">Inventory</button>
+            </div>
+            <div class="account-button-container">
+              <button class="account-button">Privacy</button>
+            </div>
+            <div class="account-button-logout-container">
+              <button class="account-button-logout">Logout</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -123,9 +140,16 @@
         <!-- SEARCH FIELD + MODE + SUGGESTION -->
 
         <!-- SEARCH + EMERGENCY MODE HERE -->
-        <div style="display: flex; position: relative">
+        <div style="display: flex; position: relative ; flex-wrap: wrap;">
           <!-- SEARCH FIELD -->
-          <input class="searchBox" type="text" name="searchBox" placeholder="Item" />
+
+          <div style="width: 70%; height: 40px;">
+            <div class="searchBox">
+              <input id='search-box' oninput="expandSuggestions(event)" type="text" name="searchBox"
+                placeholder="Item" />
+              <div id='suggestions-container'></div>
+            </div>
+          </div>
           <!-- EMERGENCY MODE -->
           <div style="display: flex; flex-direction: column; margin-left: 10px">
             <label class="form-switch">
@@ -148,15 +172,6 @@
         <div id="itemError" style="display: none; align-items: center; ">
           <div class="errorCircle" style='background-color: lightcoral; margin:5px'></div>
           <p style='color:lightcoral ;font-size:13px'>Please enter your item name</p>
-        </div>
-
-        <!-- SUGGESTION HERE -->
-        <div style="position: relative">
-          <button class="suggestButton" id='backup_charger' onclick="sorted(event)" value='Backup Charger'>Backup
-            Charger</button>
-          <button class="suggestButton" id='car' onclick="sorted(event)" value='Car'>Car</button>
-          <button class="suggestButton" id='bike' onclick="sorted(event)" value='Bike'>Bike</button>
-          <button class="suggestButton" id='camera' onclick="sorted(event)" value='Camera'>Camera</button>
         </div>
 
         <!-- RESULT HERE -->
