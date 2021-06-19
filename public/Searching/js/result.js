@@ -27,7 +27,8 @@ function addResult(data){
         guestPosition : guestPosition,
         guestSocketID: guestSocketID,
         ownerPosition : currentPosition,
-        ownerSocketID: socketID
+        ownerSocketID: socketID,
+        
     }
 
     resultSet.push(result)
@@ -38,7 +39,7 @@ function addResult_card(result){
     let brand = result.brand
     let price = result.price
     let note = result.note
-    const socketID = result.socketID
+    const socketID = result.guestSocketID
     const position = result.guestPosition
     const distance = result.distance.toFixed(2)
     const duration = result.duration.toFixed(2)
@@ -88,8 +89,10 @@ function resultMouseEnter(e){
     const target = e.target
     const socketID = target.id
     const index = getResultIndex_by_Socket(socketID) 
+    
     if ( index !== -1){
-        const position = resultSet[index].position
+        const position = resultSet[index].guestPosition
+        console.log(position)
         flyTo(position,14)
     }
     openResultDetail(target)
@@ -112,7 +115,7 @@ function getResultIndex_by_ActivityToken(activityToken){
 
 function getResultIndex_by_Socket(socketID){
     for(let i = 0; i < resultSet.length; i++){
-        if(resultSet[i].socketID == socketID){
+        if(resultSet[i].guestSocketID == socketID){
             return i
         }
     }

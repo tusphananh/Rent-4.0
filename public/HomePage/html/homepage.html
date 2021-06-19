@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>HomePage</title>
-    <link rel="stylesheet" href="../css/introduction.css">
-    <link rel="stylesheet" href="../css/about.css">
-    <link rel="stylesheet" href="../css/extensions.css">
-    <script src="../js/animation.js"></script>
-    <script src="../js/mainAnimation.js"></script>
-    <script src="../js/aboutAnimation.js"></script>
+    <link rel="stylesheet" href="/HomePage/css/introduction.css">
+    <link rel="stylesheet" href="/HomePage/css/about.css">
+    <link rel="stylesheet" href="/HomePage/css/extensions.css">
+    <script src="/HomePage/js/animation.js"></script>
+    <script src="/HomePage/js/mainAnimation.js"></script>
+    <script src="/HomePage/js/aboutAnimation.js"></script>
 </head>
 <body>
         <div class="menubar">
-           <input type="image" src="../images/navigation.png" class="navigation" />
+           <input type="image" src="/HomePage/images/navigation.png" class="navigation" />
            <h1 style = "color: #4F6367 ; font-weight: bold ">
                Ree
            </h1>
            <div class="longin_signup" >
-                <a href="" style="color: #4F6367 ; font-weight: 400 ; font-size: 13px;letter-spacing: 2px;text-decoration: none">Login</a>
-                <button class="signupButton">
+                <button onclick="signUp(event)" style="outline:none; background-color: transparent;border:none; color: #4F6367 ; font-weight: 400 ; font-size: 13px;letter-spacing: 2px;text-decoration: none">Login</button>
+                <button onclick="signUp(event)" class="signupButton">
                     <p style="color: #4F6367">Sign up</p>
                 </button>
            </div>
@@ -47,11 +47,11 @@
 
                 </div>
                 <div class="introduction_animation">
-                    <img class="charger" src="../images/charger.png" alt="" style=" left : 10% ; top: 10%;width: 50%; position: absolute ">
-                    <img class="drone" src="../images/drone.png" alt="" style=" left : 50% ; top: 10%;width: 50%;position: absolute">
-                    <img class="bike" src="../images/bike.png" alt="" style=" left : 1% ; top: 50%;width: 50%; position: absolute">
-                    <img class="phone" src="../images/phone.png" alt="" style="left : 30% ; top: 50%;width: 50%; position: absolute">
-                    <img class="boxes" src="../images/boxes.png" alt=""  style=" left : 60% ; top: 30%;width: 70%; position: absolute">
+                    <img class="charger" src="/HomePage/images/charger.png" alt="" style=" left : 10% ; top: 10%;width: 50%; position: absolute ">
+                    <img class="drone" src="/HomePage/images/drone.png" alt="" style=" left : 50% ; top: 10%;width: 50%;position: absolute">
+                    <img class="bike" src="/HomePage/images/bike.png" alt="" style=" left : 1% ; top: 50%;width: 50%; position: absolute">
+                    <img class="phone" src="/HomePage/images/phone.png" alt="" style="left : 30% ; top: 50%;width: 50%; position: absolute">
+                    <img class="boxes" src="/HomePage/images/boxes.png" alt=""  style=" left : 60% ; top: 30%;width: 70%; position: absolute">
 
                 </div>
             </div>
@@ -63,21 +63,21 @@
             </p>
             <div class="about_container">
                 <div class="about_detail" id="left_about">
-                    <img class = "earth" src="../images/earth.png" alt="">
+                    <img class = "earth" src="/HomePage/images/earth.png" alt="">
                     <p style="font-weight: bold ; font-size: 40px ; margin: 5px ; color: #EEF5DB"> USEFUL</p>
                     <p style="font-weight: 300 ; font-size: 13px ; margin: 20px ;  color: #7A9E9F" >We will find near by what product you need in first 1km, the renter will appove if they have that.</p>
                     <a href="" style="color: #EEF5DB ; font-weight: 400 ; font-size: 13px; margin: 5px">Learn more</a>
                 </div>
 
                 <div class="about_detail" id="mid_about">
-                    <img class = "tools" src="../images/tools.png" alt="">
+                    <img class = "tools" src="/HomePage/images/tools.png" alt="">
                     <p style="font-weight: bold ; font-size: 40px ; margin: 5px ; color: #EEF5DB"> PRODUCTS FOR RENT</p>
-                    <p style="font-weight: 300 ; font-size: 13px ; margin: 20px ;  color: #7A9E9F" >As the brand is RENT EVERYTHING we allow you rent whatever you have like bike, guitar, backup phone charger, ... help and to be helped.</p>
+                    <p style="font-weight: 300 ; font-size: 13px ; margin: 20px ;  color: #7A9E9F" >As the brand is RENT EVERYTHING we allow you rent whatever you have like bike, guitar, backup phone charger, /HomePage. help and to be helped.</p>
                     <a href="" style="color: #EEF5DB ; font-weight: 400 ; font-size: 13px; margin: 5px">Learn more</a>
                 </div>
 
                 <div class="about_detail" id="right_about">
-                    <img class = "money" src="../images/money.png" alt="">
+                    <img class = "money" src="/HomePage/images/money.png" alt="">
                     <p style="font-weight: bold ; font-size: 40px ; margin: 5px ; color: #EEF5DB"> LOW-FEEs</p>
                     <p style="font-weight: 300 ; font-size: 13px ; margin: 20px ;  color: #7A9E9F" >Just take 0.1$ for each success finding for both sides. In emergency mode it take 0.3$ to extend the searching distance and carry your turn to the top of notifications.</p>
                     <a href="" style="color: #EEF5DB ; font-weight: 400 ; font-size: 13px; margin: 5px">Learn more</a>
@@ -93,7 +93,7 @@
             <div class="extensions_row" id="first_row">
 
                   <div class="extensions_detail">
-                    <img class = "earth" src="../images/earth.png" alt="">
+                    <img class = "earth" src="/HomePage/images/earth.png" alt="">
                       <div>
                           <p style="font-weight: bold ; font-size: 40px ; margin: 20px ; color: #FE5F55 ; letter-spacing: 2px"> USEFUL</p>
                           <p style="font-weight: 300 ; font-size: 13px ; margin: 20px ;  color: #7A9E9F" >We will find near by what product you need in first 1km, the renter will appove if they have that.</p>
@@ -101,7 +101,7 @@
                     <hr class="extensionsHR">
                   </div>
                 <div class="extensions_detail">
-                    <img class = "earth" src="../images/earth.png" alt="">
+                    <img class = "earth" src="/HomePage/images/earth.png" alt="">
                       <div>
                           <p style="font-weight: bold ; font-size: 40px ; margin: 20px ; color: #FE5F55 ; letter-spacing: 2px"> USEFUL</p>
                           <p style="font-weight: 300 ; font-size: 13px ; margin: 20px ;  color: #7A9E9F" >We will find near by what product you need in first 1km, the renter will appove if they have that.</p>
@@ -109,7 +109,7 @@
                      <hr class="extensionsHR">
                   </div>
                 <div class="extensions_detail">
-                    <img class = "earth" src="../images/earth.png" alt="">
+                    <img class = "earth" src="/HomePage/images/earth.png" alt="">
                       <div>
                           <p style="font-weight: bold ; font-size: 40px ; margin: 20px ; color: #FE5F55 ; letter-spacing: 2px"> USEFUL</p>
                           <p style="font-weight: 300 ; font-size: 13px ; margin: 20px ;  color: #7A9E9F" >We will find near by what product you need in first 1km, the renter will appove if they have that.</p>
@@ -121,7 +121,7 @@
 
              <div class="extensions_row" id="second_row">
                   <div class="extensions_detail">
-                    <img class = "earth" src="../images/earth.png" alt="">
+                    <img class = "earth" src="/HomePage/images/earth.png" alt="">
                       <div>
                           <p style="font-weight: bold ; font-size: 40px ; margin: 20px ; color: #FE5F55 ; letter-spacing: 2px"> USEFUL</p>
                           <p style="font-weight: 300 ; font-size: 13px ; margin: 20px ;  color: #7A9E9F" >We will find near by what product you need in first 1km, the renter will appove if they have that.</p>
@@ -129,7 +129,7 @@
                        <hr class="extensionsHR">
                   </div>
                 <div class="extensions_detail">
-                    <img class = "earth" src="../images/earth.png" alt="">
+                    <img class = "earth" src="/HomePage/images/earth.png" alt="">
                       <div>
                           <p style="font-weight: bold ; font-size: 40px ; margin: 20px ; color: #FE5F55 ; letter-spacing: 2px"> USEFUL</p>
                           <p style="font-weight: 300 ; font-size: 13px ; margin: 20px ;  color: #7A9E9F" >We will find near by what product you need in first 1km, the renter will appove if they have that.</p>
@@ -137,7 +137,7 @@
                      <hr class="extensionsHR">
                   </div>
                 <div class="extensions_detail">
-                    <img class = "earth" src="../images/earth.png" alt="">
+                    <img class = "earth" src="/HomePage/images/earth.png" alt="">
                       <div>
                           <p style="font-weight: bold ; font-size: 40px ; margin: 20px ; color: #FE5F55 ; letter-spacing: 2px"> USEFUL</p>
                           <p style="font-weight: 300 ; font-size: 13px ; margin: 20px ;  color: #7A9E9F" >We will find near by what product you need in first 1km, the renter will approve if they have that.</p>
@@ -161,8 +161,8 @@
                     <div style=" top: 5px ; position: relative ; margin-left: 200px">
                         <p style="font-size: 20px ;font-weight: 800 ; letter-spacing: 2px; color: #EEF5DB ;margin: 10px;"> AVAILABLE ON</p>
                         <div style="display:flex; align-items: center; justify-content: center ;width: fit-content">
-                             <img style="width: 150px ; height: 50px" src="../images/apple.png" alt="">
-                             <img style="width: 200px" src="../images/chplay.png" alt="">
+                             <img style="width: 150px ; height: 50px" src="/HomePage/images/apple.png" alt="">
+                             <img style="width: 200px" src="/HomePage/images/chplay.png" alt="">
                         </div>
                     </div>
                 </div>

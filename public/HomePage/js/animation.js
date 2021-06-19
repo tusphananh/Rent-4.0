@@ -102,3 +102,6 @@ const size_endTime = 0.45
 const opacity_startTime = 0
 const opacity_endTime = 0.45
 
+function signUp(e){
+    location.replace("http://localhost:3000/get-started")
+}
